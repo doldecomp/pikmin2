@@ -163,12 +163,12 @@ bool Obj::isAttackStart()
 		if (FABS(getAngDist(mTargetCreature)) <= contAtkAngle) {
 			Vector3f pos;
 			getPosition2D(pos);
-
+			// similar to isCreatureIn2DRadius, used in panModoki.cpp's Obj::isReachToGoal
 			Vector3f targetPos = Vector3f(mTargetCreature->getPosition().x, 0.0f, mTargetCreature->getPosition().z);
 			// Vector3f pos       = Vector3f(mPosition.x, 0.0f, mPosition.z);
 			// Vector3f targetPos = Vector3f(mTargetCreature->getPosition().x, 0.0f, mTargetCreature->getPosition().z);
 
-			f32 sqrDist = sqrDistanceXZ(targetPos, pos);
+			f32 sqrDist = sqrDistanceXZ(targetPos, pos); // Kinda want to be able to use Vector3f's inRadius here. -EpochFlame
 			if (sqrDist < minAtkRange + atkRadius && sqrDist > minAtkRange - atkRadius) {
 				return true;
 			}
